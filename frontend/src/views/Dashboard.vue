@@ -1,57 +1,62 @@
 <template>
-  <div class="dashboard-layout">
-    <nav class="sidebar"> 
+  <div class="dashboard-layout" :class="{ 'sidebar-collapsed': isSidebarCollapsed }">
+
+    <nav class="sidebar">
       <div class="sidebar-header">
         <img src="@/assets/Logo_G.png" alt="Logo GestIUT" class="sidebar-logo" />
-        <h3 class="sidebar-title">IUT Gestion</h3> 
+        <h3 class="sidebar-title">IUT Gestion</h3>
+
+        <button @click="toggleSidebar" class="toggle-button">
+          «
+        </button>
       </div>
-      
+
       <ul class="nav-links">
         <li>
           <a href="#" class="active">
-            <span class="nav-icon">📊</span> 
+            <span class="nav-icon">📊</span>
             <span class="nav-text">Tableau de bord</span>
           </a>
         </li>
         <li>
           <a href="#">
-            <span class="nav-icon">#️⃣</span> 
+            <span class="nav-icon">#️⃣</span>
             <span class="nav-text">Gestion des rôle</span>
           </a>
         </li>
         <li>
           <a href="#">
-            <span class="nav-icon">📄</span> 
+            <span class="nav-icon">📄</span>
             <span class="nav-text">Fiches ressources</span>
           </a>
         </li>
         <li>
           <a href="#">
-            <span class="nav-icon">🎓</span> 
+            <span class="nav-icon">🎓</span>
             <span class="nav-text">MCCC</span>
           </a>
         </li>
         <li>
           <a href="#">
-            <span class="nav-icon">🔧</span> 
+            <span class="nav-icon">🔧</span>
             <span class="nav-text">TAC</span>
           </a>
         </li>
         <li>
           <a href="#">
-            <span class="nav-icon">👥</span> 
+            <span class="nav-icon">👥</span>
             <span class="nav-text">Enseignants & Vacataires</span>
           </a>
         </li>
         <li>
           <a href="#">
-            <span class="nav-icon">⚙️</span> 
+            <span class="nav-icon">⚙️</span>
             <span class="nav-text">Paramètres</span>
           </a>
         </li>
       </ul>
-      </nav>
-    
+    </nav>
+
     <main class="main-content">
       <header class="header">
         <div class="header-welcome">
@@ -86,23 +91,24 @@
 <script>
 export default {
   name: 'DashboardView',
-  data() { // Ajout de la section data
+  data() {
     return {
-      isSidebarCollapsed: false // L'état pour savoir si c'est replié (false = ouvert)
+      isSidebarCollapsed: false
     };
   },
   methods: {
     logout() {
       localStorage.removeItem('user-token');
       this.$router.push('/connexion');
+    },
+    toggleSidebar() {
+      this.isSidebarCollapsed = !this.isSidebarCollapsed;
     }
-    // On ajoutera une méthode toggleSidebar() ici
   }
 }
 </script>
 
 <style scoped>
-/* Variables CSS */
 .dashboard-layout {
   --font-primary: 'Poppins', sans-serif;
   --font-secondary: 'Montserrat', sans-serif;
@@ -113,50 +119,78 @@ export default {
   --color-text: #555;
   --color-border: #eee;
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
-  --sidebar-width-open: 260px; /* Largeur ouverte */
-  --sidebar-width-closed: 80px;  /* Largeur fermée (ajustez si besoin) */
+  --sidebar-width-open: 260px;
+  --sidebar-width-closed: 80px;
+  --sidebar-transition-duration: 0.3s;
 
   display: flex;
   min-height: 100vh;
   background-color: #fcfcfc;
   font-family: var(--font-secondary);
+  overflow-x: hidden;
 }
 
-/* Sidebar */
 .sidebar {
-  width: var(--sidebar-width-open); /* Utilise la variable */
+  width: var(--sidebar-width-open);
   flex-shrink: 0;
   background-color: var(--color-grey-light);
   border-right: 1px solid var(--color-border);
   box-sizing: border-box;
   padding: 1.5rem;
-  /* On ajoutera une transition ici */
+  position: relative;
+  transition: width var(--sidebar-transition-duration) ease;
 }
 
 .sidebar-header {
   display: flex;
   align-items: center;
-  gap: 15px; 
+  gap: 15px;
   padding-bottom: 1rem;
   margin-bottom: 1rem;
   border-bottom: 1px solid var(--color-border);
+  position: relative;
 }
 
 .sidebar-logo {
-  height: 45px; 
+  height: 45px;
   width: auto;
-  /* On ajoutera une transition ici */
+  transition: opacity var(--sidebar-transition-duration) ease;
 }
 
-.sidebar-title { /* Renommé h3 en .sidebar-title */
+.sidebar-title {
   margin: 0;
   font-family: var(--font-primary);
   font-size: 1.4rem;
   font-weight: 700;
   color: #333;
-  /* On ajoutera des styles pour cacher/afficher */
-  white-space: nowrap; /* Empêche le texte de passer à la ligne */
-  overflow: hidden; /* Cache le texte qui dépasse */
+  white-space: nowrap;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity var(--sidebar-transition-duration) ease, width var(--sidebar-transition-duration) ease;
+}
+
+.toggle-button {
+  position: absolute;
+  top: 50%;
+  right: -35px;
+  transform: translateY(-50%);
+  background-color: white;
+  border: 1px solid var(--color-border);
+  border-left: none;
+  border-radius: 0 50% 50% 0;
+  width: 25px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: var(--color-text);
+  z-index: 10;
+  transition: transform var(--sidebar-transition-duration) ease, right var(--sidebar-transition-duration) ease;
+}
+.toggle-button:hover {
+  background-color: #eee;
 }
 
 .nav-links {
@@ -170,29 +204,30 @@ export default {
 }
 
 .nav-links a {
-  display: flex; 
+  display: flex;
   align-items: center;
-  /* gap enlevé, on gère l'espace différemment */
   padding: 0.75rem 1rem;
   text-decoration: none;
   color: var(--color-text);
   font-weight: 500;
   border-radius: 8px;
   transition: background-color 0.2s ease, color 0.2s ease;
-  white-space: nowrap; /* Empêche le texte de passer à la ligne */
-  overflow: hidden; /* Cache le texte qui dépasse */
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .nav-icon {
   display: inline-block;
-  width: 24px; /* Largeur fixe pour l'icône */
+  width: 24px;
   text-align: center;
-  margin-right: 12px; /* Espace entre icône et texte */
-  flex-shrink: 0; /* Empêche l'icône de rétrécir */
+  margin-right: 12px;
+  flex-shrink: 0;
+  transition: margin-right var(--sidebar-transition-duration) ease;
 }
 
 .nav-text {
-  /* On ajoutera des styles pour cacher/afficher */
+  opacity: 1;
+  transition: opacity var(--sidebar-transition-duration) ease;
 }
 
 .nav-links a:hover {
@@ -200,21 +235,57 @@ export default {
 }
 
 .nav-links a.active {
-  background-color: #e6f0ff; 
-  color: #0056b3; 
+  background-color: #e6f0ff;
+  color: #0056b3;
   font-weight: 600;
 }
 
-/* Main Content */
+.dashboard-layout.sidebar-collapsed .sidebar {
+  width: var(--sidebar-width-closed);
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.dashboard-layout.sidebar-collapsed .sidebar-title {
+  opacity: 0;
+  width: 0;
+}
+
+.dashboard-layout.sidebar-collapsed .toggle-button {
+  transform: translateY(-50%) rotate(180deg);
+  right: -25px;
+  border-left: 1px solid var(--color-border);
+}
+
+.dashboard-layout.sidebar-collapsed .nav-text {
+  opacity: 0;
+  width: 0;
+}
+
+.dashboard-layout.sidebar-collapsed .nav-icon {
+  margin-right: 0;
+}
+.dashboard-layout.sidebar-collapsed .nav-links a {
+  justify-content: center;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
 .main-content {
   flex-grow: 1;
   background-color: #fcfcfc;
   box-sizing: border-box;
   padding: 2rem 3rem;
-  /* On ajoutera une transition ici pour le margin-left */
+  /* margin-left et transition commentés pour ne pas pousser le contenu */
+  /* margin-left: var(--sidebar-width-open); */
+  /* transition: margin-left var(--sidebar-transition-duration) ease; */
 }
 
-/* Header */
+/* Règle commentée pour ne pas ajuster la marge */
+/* .dashboard-layout.sidebar-collapsed .main-content {
+  margin-left: var(--sidebar-width-closed);
+} */
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -248,13 +319,13 @@ export default {
 }
 
 .user-info span {
-  display: flex; 
+  display: flex;
   align-items: center;
   gap: 8px;
 }
 
 .user-info a {
-  color: var(--color-primary); 
+  color: var(--color-primary);
   text-decoration: none;
   font-weight: 600;
 }
@@ -262,7 +333,6 @@ export default {
   text-decoration: underline;
 }
 
-/* Content Cards */
 .content-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -274,7 +344,7 @@ export default {
   padding: 2rem;
   border-radius: 20px;
   box-shadow: var(--shadow);
-  border: 1px solid #eef; 
+  border: 1px solid #eef;
 }
 
 .card h3 {
@@ -309,7 +379,7 @@ export default {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: #28a745; 
+  background-color: #28a745;
   color: white;
   display: flex;
   align-items: center;
