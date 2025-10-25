@@ -1,75 +1,38 @@
 <template>
-  <div class="dashboard-layout" :class="{ 'sidebar-collapsed': isSidebarCollapsed }">
+  <div class="page-layout">
+    <header class="top-header">
+      <div class="header-content">
+        <div class="brand-section" @click="toggleNav">
+          <img src="@/assets/GestIUT_logo.png" alt="Logo GestIUT" class="brand-logo" />
+          <span class="dropdown-arrow" :class="{ 'open': isNavOpen }">▼</span>
+        </div>
 
-    <nav class="sidebar">
-      <div class="sidebar-header">
-        <img src="@/assets/Logo_G.png" alt="Logo GestIUT" class="sidebar-logo" />
-        <h3 class="sidebar-title">IUT Gestion</h3>
-
-        <button @click="toggleSidebar" class="toggle-button">
-          «
-        </button>
+        <div class="user-section-placeholder">
+           <span>👤 Administrateur</span>
+           <a href="#" @click.prevent="logout">Déconnexion</a>
+        </div>
       </div>
-
-      <ul class="nav-links">
-        <li>
-          <a href="#" class="active">
-            <span class="nav-icon">📊</span>
-            <span class="nav-text">Tableau de bord</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <span class="nav-icon">#️⃣</span>
-            <span class="nav-text">Gestion des rôle</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <span class="nav-icon">📄</span>
-            <span class="nav-text">Fiches ressources</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <span class="nav-icon">🎓</span>
-            <span class="nav-text">MCCC</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <span class="nav-icon">🔧</span>
-            <span class="nav-text">TAC</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <span class="nav-icon">👥</span>
-            <span class="nav-text">Enseignants & Vacataires</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <span class="nav-icon">⚙️</span>
-            <span class="nav-text">Paramètres</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
+      <nav class="dropdown-nav" :class="{ 'open': isNavOpen }">
+         <ul class="nav-links">
+          <li><a href="#" class="active">📊 Tableau de bord</a></li>
+          <li><a href="#">#️⃣ Gestion des rôle</a></li>
+          <li><a href="#">📄 Fiches ressources</a></li>
+          <li><a href="#">🎓 MCCC</a></li>
+          <li><a href="#">🔧 TAC</a></li>
+          <li><a href="#">👥 Enseignants & Vacataires</a></li>
+          <li><a href="#">⚙️ Paramètres</a></li>
+        </ul>
+      </nav>
+    </header>
 
     <main class="main-content">
-      <header class="header">
+       <header class="content-header">
         <div class="header-welcome">
           <h2>Bonjour, [Nom] [Prenom]</h2>
           <h1>Tableau de bord</h1>
         </div>
-        <div class="user-info">
-          <span>👤 Administrateur</span>
-          <a href="#" @click.prevent="logout">Déconnexion</a>
-        </div>
-      </header>
-
-      <section class="content-cards">
+       </header>
+       <section class="content-cards">
         <div class="card">
           <h3>Remplir la fiche</h3>
           <p>Algorithmique avancée</p>
@@ -93,23 +56,24 @@ export default {
   name: 'DashboardView',
   data() {
     return {
-      isSidebarCollapsed: false
+      isNavOpen: false
     };
   },
   methods: {
-    logout() {
+    toggleNav() {
+      this.isNavOpen = !this.isNavOpen;
+    },
+     logout() {
       localStorage.removeItem('user-token');
       this.$router.push('/connexion');
-    },
-    toggleSidebar() {
-      this.isSidebarCollapsed = !this.isSidebarCollapsed;
     }
   }
 }
 </script>
 
 <style scoped>
-.dashboard-layout {
+/* Variables */
+.page-layout {
   --font-primary: 'Poppins', sans-serif;
   --font-secondary: 'Montserrat', sans-serif;
   --color-primary: #C00000;
@@ -118,84 +82,102 @@ export default {
   --color-grey-dark: #333;
   --color-text: #555;
   --color-border: #eee;
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
-  --sidebar-width-open: 260px;
-  --sidebar-width-closed: 80px;
-  --sidebar-transition-duration: 0.3s;
+  --shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  --header-height: 70px;
+  --nav-transition-duration: 0.3s;
+}
 
-  display: flex;
+/* Layout */
+.page-layout {
   min-height: 100vh;
   background-color: #fcfcfc;
   font-family: var(--font-secondary);
-  overflow-x: hidden;
+  padding-top: var(--header-height);
 }
 
-.sidebar {
-  width: var(--sidebar-width-open);
-  flex-shrink: 0;
-  background-color: var(--color-grey-light);
-  border-right: 1px solid var(--color-border);
-  box-sizing: border-box;
-  padding: 1.5rem;
-  position: relative;
-  transition: width var(--sidebar-transition-duration) ease;
-}
-
-.sidebar-header {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding-bottom: 1rem;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid var(--color-border);
-  position: relative;
-}
-
-.sidebar-logo {
-  height: 45px;
-  width: auto;
-  transition: opacity var(--sidebar-transition-duration) ease;
-}
-
-.sidebar-title {
-  margin: 0;
-  font-family: var(--font-primary);
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #333;
-  white-space: nowrap;
-  overflow: hidden;
-  opacity: 1;
-  transition: opacity var(--sidebar-transition-duration) ease, width var(--sidebar-transition-duration) ease;
-}
-
-.toggle-button {
-  position: absolute;
-  top: 50%;
-  right: -35px;
-  transform: translateY(-50%);
+/* Header Fixe */
+.top-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   background-color: white;
-  border: 1px solid var(--color-border);
-  border-left: none;
-  border-radius: 0 50% 50% 0;
-  width: 25px;
-  height: 40px;
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--shadow);
+  z-index: 1000;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: var(--header-height);
+  padding: 0 2rem;
+  box-sizing: border-box;
+}
+
+.brand-section {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 10px;
   cursor: pointer;
-  font-size: 1.2rem;
-  color: var(--color-text);
-  z-index: 10;
-  transition: transform var(--sidebar-transition-duration) ease, right var(--sidebar-transition-duration) ease;
 }
-.toggle-button:hover {
-  background-color: #eee;
+
+/* Style pour le logo GestIUT (agrandit) */
+.brand-logo {
+  height: 100px; /* Agrandit (avant 45px) */
+  width: auto;
+}
+
+/* Flèche déroulante */
+.dropdown-arrow {
+  font-size: 0.8rem;
+  color: var(--color-text);
+  transition: transform var(--nav-transition-duration) ease;
+}
+.dropdown-arrow.open {
+  transform: rotate(180deg);
+}
+
+/* Section utilisateur */
+.user-section-placeholder {
+   display: flex;
+   align-items: center;
+   font-size: 0.9rem;
+   color: var(--color-text);
+   gap: 1.5rem;
+}
+.user-section-placeholder span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.user-section-placeholder a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+.user-section-placeholder a:hover {
+  text-decoration: underline;
+}
+
+/* Menu Déroulant */
+.dropdown-nav {
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--nav-transition-duration) ease-out;
+  border-top: 1px solid var(--color-border);
+}
+
+.dropdown-nav.open {
+  max-height: 500px; /* Hauteur estimée */
 }
 
 .nav-links {
   list-style: none;
-  padding: 0;
+  padding: 1rem 2rem;
   margin: 0;
 }
 
@@ -206,28 +188,13 @@ export default {
 .nav-links a {
   display: flex;
   align-items: center;
+  gap: 12px;
   padding: 0.75rem 1rem;
   text-decoration: none;
   color: var(--color-text);
   font-weight: 500;
   border-radius: 8px;
   transition: background-color 0.2s ease, color 0.2s ease;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.nav-icon {
-  display: inline-block;
-  width: 24px;
-  text-align: center;
-  margin-right: 12px;
-  flex-shrink: 0;
-  transition: margin-right var(--sidebar-transition-duration) ease;
-}
-
-.nav-text {
-  opacity: 1;
-  transition: opacity var(--sidebar-transition-duration) ease;
 }
 
 .nav-links a:hover {
@@ -240,57 +207,16 @@ export default {
   font-weight: 600;
 }
 
-.dashboard-layout.sidebar-collapsed .sidebar {
-  width: var(--sidebar-width-closed);
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-.dashboard-layout.sidebar-collapsed .sidebar-title {
-  opacity: 0;
-  width: 0;
-}
-
-.dashboard-layout.sidebar-collapsed .toggle-button {
-  transform: translateY(-50%) rotate(180deg);
-  right: -25px;
-  border-left: 1px solid var(--color-border);
-}
-
-.dashboard-layout.sidebar-collapsed .nav-text {
-  opacity: 0;
-  width: 0;
-}
-
-.dashboard-layout.sidebar-collapsed .nav-icon {
-  margin-right: 0;
-}
-.dashboard-layout.sidebar-collapsed .nav-links a {
-  justify-content: center;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-}
-
+/* Contenu Principal */
 .main-content {
-  flex-grow: 1;
-  background-color: #fcfcfc;
-  box-sizing: border-box;
   padding: 2rem 3rem;
-  /* margin-left et transition commentés pour ne pas pousser le contenu */
-  /* margin-left: var(--sidebar-width-open); */
-  /* transition: margin-left var(--sidebar-transition-duration) ease; */
+  box-sizing: border-box;
 }
 
-/* Règle commentée pour ne pas ajuster la marge */
-/* .dashboard-layout.sidebar-collapsed .main-content {
-  margin-left: var(--sidebar-width-closed);
-} */
-
-.header {
+.content-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  border-bottom: 1px solid var(--color-border);
   padding-bottom: 1.5rem;
   margin-bottom: 2rem;
 }
@@ -308,29 +234,6 @@ export default {
   font-weight: 500;
   color: var(--color-text);
   margin: 0;
-}
-
-.user-info {
-  display: flex;
-  align-items: center;
-  font-size: 0.9rem;
-  color: var(--color-text);
-  gap: 1.5rem;
-}
-
-.user-info span {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.user-info a {
-  color: var(--color-primary);
-  text-decoration: none;
-  font-weight: 600;
-}
-.user-info a:hover {
-  text-decoration: underline;
 }
 
 .content-cards {
