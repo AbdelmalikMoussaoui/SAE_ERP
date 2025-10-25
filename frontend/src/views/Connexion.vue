@@ -41,8 +41,8 @@ export default {
       password: '',
       errorMessage: '',
       isLoading: false // L'état pour afficher/cacher le spinner
-    }; // <-- La virgule manquait APRÈS ce crochet
-  }, // <-- ET CETTE VIRGULE MANQUAIT
+    }; 
+  }, // <-- La virgule est importante ici
   
   methods: {
     async handleLogin() {
@@ -89,7 +89,6 @@ export default {
   min-height: 100vh;
   background-color: #f8f9fa;
   font-family: 'Montserrat', sans-serif;
-  /* J'ajoute un peu d'espace en haut et en bas au cas où */
   padding: 2rem 0;
   box-sizing: border-box;
 }

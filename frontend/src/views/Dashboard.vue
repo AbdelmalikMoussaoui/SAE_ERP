@@ -88,7 +88,7 @@ export default {
 }
 
 /* ======================== */
-/* BARRE LATERALE     */
+/* BARRE LATERALE       */
 /* ======================== */
 .sidebar {
   width: 260px;
