@@ -1,20 +1,57 @@
 <template>
   <div class="dashboard-layout">
-    <nav class="sidebar">
+    <nav class="sidebar"> 
       <div class="sidebar-header">
         <img src="@/assets/Logo_G.png" alt="Logo GestIUT" class="sidebar-logo" />
-        <h3>IUT Gestion</h3>
+        <h3 class="sidebar-title">IUT Gestion</h3> 
       </div>
+      
       <ul class="nav-links">
-        <li><a href="#" class="active">📊 Tableau de bord</a></li>
-        <li><a href="#">#️⃣ Gestion des rôle</a></li>
-        <li><a href="#">📄 Fiches ressources</a></li>
-        <li><a href="#">🎓 MCCC</a></li>
-        <li><a href="#">🔧 TAC</a></li>
-        <li><a href="#">👥 Enseignants & Vacataires</a></li>
-        <li><a href="#">⚙️ Paramètres</a></li>
+        <li>
+          <a href="#" class="active">
+            <span class="nav-icon">📊</span> 
+            <span class="nav-text">Tableau de bord</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <span class="nav-icon">#️⃣</span> 
+            <span class="nav-text">Gestion des rôle</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <span class="nav-icon">📄</span> 
+            <span class="nav-text">Fiches ressources</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <span class="nav-icon">🎓</span> 
+            <span class="nav-text">MCCC</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <span class="nav-icon">🔧</span> 
+            <span class="nav-text">TAC</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <span class="nav-icon">👥</span> 
+            <span class="nav-text">Enseignants & Vacataires</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <span class="nav-icon">⚙️</span> 
+            <span class="nav-text">Paramètres</span>
+          </a>
+        </li>
       </ul>
-    </nav>
+      </nav>
+    
     <main class="main-content">
       <header class="header">
         <div class="header-welcome">
@@ -28,14 +65,12 @@
       </header>
 
       <section class="content-cards">
-        
         <div class="card">
           <h3>Remplir la fiche</h3>
           <p>Algorithmique avancée</p>
           <p class="subtitle">Semestre 3</p>
           <button class="btn-primary">Compléter</button>
         </div>
-
         <div class="card card-notifications">
           <div class="icon-success">
             <span>✔</span>
@@ -43,7 +78,6 @@
           <h3>Notifications</h3>
           <p>Aucun notification</p>
         </div>
-
       </section>
     </main>
   </div>
@@ -52,16 +86,23 @@
 <script>
 export default {
   name: 'DashboardView',
+  data() { // Ajout de la section data
+    return {
+      isSidebarCollapsed: false // L'état pour savoir si c'est replié (false = ouvert)
+    };
+  },
   methods: {
     logout() {
       localStorage.removeItem('user-token');
       this.$router.push('/connexion');
     }
+    // On ajoutera une méthode toggleSidebar() ici
   }
 }
 </script>
 
 <style scoped>
+/* Variables CSS */
 .dashboard-layout {
   --font-primary: 'Poppins', sans-serif;
   --font-secondary: 'Montserrat', sans-serif;
@@ -72,6 +113,8 @@ export default {
   --color-text: #555;
   --color-border: #eee;
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+  --sidebar-width-open: 260px; /* Largeur ouverte */
+  --sidebar-width-closed: 80px;  /* Largeur fermée (ajustez si besoin) */
 
   display: flex;
   min-height: 100vh;
@@ -79,42 +122,41 @@ export default {
   font-family: var(--font-secondary);
 }
 
+/* Sidebar */
 .sidebar {
-  width: 260px;
+  width: var(--sidebar-width-open); /* Utilise la variable */
   flex-shrink: 0;
   background-color: var(--color-grey-light);
   border-right: 1px solid var(--color-border);
   box-sizing: border-box;
   padding: 1.5rem;
-}
-
-.main-content {
-  flex-grow: 1;
-  background-color: #fcfcfc;
-  box-sizing: border-box;
-  padding: 2rem 3rem;
+  /* On ajoutera une transition ici */
 }
 
 .sidebar-header {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 15px; 
   padding-bottom: 1rem;
   margin-bottom: 1rem;
   border-bottom: 1px solid var(--color-border);
 }
 
 .sidebar-logo {
-  height: 45px;
+  height: 45px; 
   width: auto;
+  /* On ajoutera une transition ici */
 }
 
-.sidebar-header h3 {
+.sidebar-title { /* Renommé h3 en .sidebar-title */
   margin: 0;
   font-family: var(--font-primary);
   font-size: 1.4rem;
   font-weight: 700;
   color: #333;
+  /* On ajoutera des styles pour cacher/afficher */
+  white-space: nowrap; /* Empêche le texte de passer à la ligne */
+  overflow: hidden; /* Cache le texte qui dépasse */
 }
 
 .nav-links {
@@ -128,15 +170,29 @@ export default {
 }
 
 .nav-links a {
-  display: flex;
+  display: flex; 
   align-items: center;
-  gap: 12px;
+  /* gap enlevé, on gère l'espace différemment */
   padding: 0.75rem 1rem;
   text-decoration: none;
   color: var(--color-text);
   font-weight: 500;
   border-radius: 8px;
   transition: background-color 0.2s ease, color 0.2s ease;
+  white-space: nowrap; /* Empêche le texte de passer à la ligne */
+  overflow: hidden; /* Cache le texte qui dépasse */
+}
+
+.nav-icon {
+  display: inline-block;
+  width: 24px; /* Largeur fixe pour l'icône */
+  text-align: center;
+  margin-right: 12px; /* Espace entre icône et texte */
+  flex-shrink: 0; /* Empêche l'icône de rétrécir */
+}
+
+.nav-text {
+  /* On ajoutera des styles pour cacher/afficher */
 }
 
 .nav-links a:hover {
@@ -149,6 +205,16 @@ export default {
   font-weight: 600;
 }
 
+/* Main Content */
+.main-content {
+  flex-grow: 1;
+  background-color: #fcfcfc;
+  box-sizing: border-box;
+  padding: 2rem 3rem;
+  /* On ajoutera une transition ici pour le margin-left */
+}
+
+/* Header */
 .header {
   display: flex;
   justify-content: space-between;
@@ -182,7 +248,7 @@ export default {
 }
 
 .user-info span {
-  display: flex;
+  display: flex; 
   align-items: center;
   gap: 8px;
 }
@@ -196,6 +262,7 @@ export default {
   text-decoration: underline;
 }
 
+/* Content Cards */
 .content-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
