@@ -26,7 +26,26 @@
           <a href="#" @click.prevent="logout">Déconnexion</a>
         </div>
       </header>
-      </main>
+
+      <section class="content-cards">
+        
+        <div class="card">
+          <h3>Remplir la fiche</h3>
+          <p>Algorithmique avancée</p>
+          <p class="subtitle">Semestre 3</p>
+          <button class="btn-primary">Compléter</button>
+        </div>
+
+        <div class="card card-notifications">
+          <div class="icon-success">
+            <span>✔</span>
+          </div>
+          <h3>Notifications</h3>
+          <p>Aucun notification</p>
+        </div>
+
+      </section>
+    </main>
   </div>
 </template>
 
@@ -54,14 +73,12 @@ export default {
   --color-border: #eee;
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
 
-  /* --- Layout Principal --- */
   display: flex;
   min-height: 100vh;
   background-color: #fcfcfc;
   font-family: var(--font-secondary);
 }
 
-/* --- Barre latérale (Sidebar) --- */
 .sidebar {
   width: 260px;
   flex-shrink: 0;
@@ -71,27 +88,24 @@ export default {
   padding: 1.5rem;
 }
 
-/* --- Contenu Principal --- */
 .main-content {
   flex-grow: 1;
   background-color: #fcfcfc;
   box-sizing: border-box;
-  padding: 2rem 3rem; 
+  padding: 2rem 3rem;
 }
-
-/* --- Styles de la Sidebar --- */
 
 .sidebar-header {
   display: flex;
   align-items: center;
   gap: 15px;
   padding-bottom: 1rem;
-  margin-bottom: 1rem; 
+  margin-bottom: 1rem;
   border-bottom: 1px solid var(--color-border);
 }
 
 .sidebar-logo {
-  height: 55px; 
+  height: 45px;
   width: auto;
 }
 
@@ -135,8 +149,6 @@ export default {
   font-weight: 600;
 }
 
-/* --- NOUVEAUX STYLES POUR LE HEADER --- */
-
 .header {
   display: flex;
   justify-content: space-between;
@@ -176,11 +188,87 @@ export default {
 }
 
 .user-info a {
-  color: var(--color-primary);
+  color: var(--color-primary); 
   text-decoration: none;
   font-weight: 600;
 }
 .user-info a:hover {
   text-decoration: underline;
+}
+
+.content-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  border: 1px solid #eef; 
+}
+
+.card h3 {
+  font-family: var(--font-primary);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-grey-dark);
+  margin: 0 0 0.5rem 0;
+}
+
+.card p {
+  font-size: 1rem;
+  color: var(--color-text);
+  margin: 0.25rem 0;
+}
+
+.card p.subtitle {
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 1.5rem;
+}
+
+.card-notifications {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.icon-success {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #28a745; 
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--color-primary);
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  margin-top: 1rem;
+  font-family: var(--font-primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-dark);
+  box-shadow: 0 5px 15px rgba(192, 0, 0, 0.3);
 }
 </style>
