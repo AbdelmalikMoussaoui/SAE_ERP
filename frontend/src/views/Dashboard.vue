@@ -109,6 +109,7 @@ export default {
 </script>
 
 <style scoped>
+/* Variables CSS */
 .dashboard-layout {
   --font-primary: 'Poppins', sans-serif;
   --font-secondary: 'Montserrat', sans-serif;
@@ -130,6 +131,7 @@ export default {
   overflow-x: hidden;
 }
 
+/* Sidebar */
 .sidebar {
   width: var(--sidebar-width-open);
   flex-shrink: 0;
@@ -174,6 +176,7 @@ export default {
               width var(--sidebar-transition-duration) ease;
 }
 
+/* Bouton Toggle */
 .toggle-button {
   position: absolute;
   top: 50%;
@@ -253,6 +256,7 @@ export default {
   font-weight: 600;
 }
 
+/* Styles pour l'état replié */
 .dashboard-layout.sidebar-collapsed .sidebar {
   width: var(--sidebar-width-closed);
   padding-left: 1rem;
@@ -284,19 +288,18 @@ export default {
   padding-right: 0.5rem;
 }
 
+/* Main Content (CORRIGÉ) */
 .main-content {
-  flex-grow: 1;
+  flex-grow: 1; /* Prend l'espace restant */
   background-color: #fcfcfc;
   box-sizing: border-box;
+  /* Padding intérieur standard */
   padding: 2rem 3rem;
-  margin-left: var(--sidebar-width-open);
-  transition: margin-left var(--sidebar-transition-duration) ease;
+  /* Pas de margin-left, flexbox gère l'espace */
+  transition: padding-left var(--sidebar-transition-duration) ease; /* On anime le padding si besoin */
 }
 
-.dashboard-layout.sidebar-collapsed .main-content {
-  margin-left: var(--sidebar-width-closed);
-}
-
+/* Header (dans main-content) */
 .header {
   display: flex;
   justify-content: space-between;
@@ -344,6 +347,7 @@ export default {
   text-decoration: underline;
 }
 
+/* Content Cards */
 .content-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
