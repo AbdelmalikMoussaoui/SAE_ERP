@@ -14,43 +14,43 @@
       <ul class="nav-links">
         <li>
           <a href="#" class="active">
-            <span class="nav-icon">📊</span>
+            
             <span class="nav-text">Tableau de bord</span>
           </a>
         </li>
         <li>
           <a href="#">
-            <span class="nav-icon">#️⃣</span>
+            
             <span class="nav-text">Gestion des rôle</span>
           </a>
         </li>
         <li>
           <a href="#">
-            <span class="nav-icon">📄</span>
+            
             <span class="nav-text">Fiches ressources</span>
           </a>
         </li>
         <li>
           <a href="#">
-            <span class="nav-icon">🎓</span>
+           
             <span class="nav-text">MCCC</span>
           </a>
         </li>
         <li>
           <a href="#">
-            <span class="nav-icon">🔧</span>
+            
             <span class="nav-text">TAC</span>
           </a>
         </li>
         <li>
           <a href="#">
-            <span class="nav-icon">👥</span>
+            
             <span class="nav-text">Enseignants & Vacataires</span>
           </a>
         </li>
         <li>
           <a href="#">
-            <span class="nav-icon">⚙️</span>
+           
             <span class="nav-text">Paramètres</span>
           </a>
         </li>
@@ -64,7 +64,7 @@
           <h1>Tableau de bord</h1>
         </div>
         <div class="user-info">
-          <span>👤 Administrateur</span>
+          <span> Administrateur</span>
           <a href="#" @click.prevent="logout">Déconnexion</a>
         </div>
       </header>
