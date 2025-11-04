@@ -9,7 +9,7 @@
       </div>
       <img src="@/assets/GestIUT_logo.png" alt="Logo GestIUT" class="app-title-logo" />
 
-      <h2>Se connecter</h2>
+      <h2>Veuillez vous authentifier</h2>
 
       <form @submit.prevent="handleLogin">
         
@@ -94,7 +94,7 @@ export default {
 }
 
 .main-logo {
-  width: 200px;
+  width: 235px;
   margin-bottom: 2rem;
 }
 
@@ -111,20 +111,22 @@ export default {
 }
 
 .app-title-logo {
-  max-width: 324px; 
+  max-width: 310px; 
   width: 100%;
   height: auto;
-  margin-top: -2.75rem;
-  margin-bottom: -1.5rem;
+  margin-bottom: -1rem;
+  margin-top: -0.75rem;
 }
 
 
 h2 {
-  font-size: 1.75rem;
+  font-size: 1.3rem;
   font-weight: 600;
   color: #333;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
   font-family: 'Poppins', sans-serif;
+  margin-top: 1.5rem;
+  opacity: 60%;
 }
 
 .input-group {
