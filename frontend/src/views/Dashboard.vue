@@ -14,43 +14,43 @@
       <ul class="nav-links">
         <li>
           <a href="#" class="active">
-            
+            <img src="@/assets/TableauDeBord.png" alt="Tableau de bord" class="nav-icon" />
             <span class="nav-text">Tableau de bord</span>
           </a>
         </li>
         <li>
           <a href="#">
-            
+            <img src="@/assets/GestionDesRôles.png" alt="Gestion des rôles" class="nav-icon" />
             <span class="nav-text">Gestion des rôle</span>
           </a>
         </li>
         <li>
           <a href="#">
-            
+            <img src="@/assets/FicheRessource.png" alt="Fiches ressources" class="nav-icon" />
             <span class="nav-text">Fiches ressources</span>
           </a>
         </li>
         <li>
           <a href="#">
-           
+            <img src="@/assets/MCC.png" alt="MCCC" class="nav-icon" />
             <span class="nav-text">MCCC</span>
           </a>
         </li>
         <li>
           <a href="#">
-            
+            <img src="@/assets/TAC.png" alt="TAC" class="nav-icon" />
             <span class="nav-text">TAC</span>
           </a>
         </li>
         <li>
           <a href="#">
-            
+            <img src="@/assets/EnseignantVacataire.png" alt="Enseignants & Vacataires" class="nav-icon" />
             <span class="nav-text">Enseignants & Vacataires</span>
           </a>
         </li>
         <li>
           <a href="#">
-           
+            <img src="@/assets/Parametre.png" alt="Paramètres" class="nav-icon" />
             <span class="nav-text">Paramètres</span>
           </a>
         </li>
@@ -64,7 +64,10 @@
           <h1>Tableau de bord</h1>
         </div>
         <div class="user-info">
-          <span> Administrateur</span>
+          <span>
+            <img src="@/assets/Bonhomme.png" alt="Admin" class="user-icon" />
+            Administrateur
+          </span>
           <a href="#" @click.prevent="logout">Déconnexion</a>
         </div>
       </header>
@@ -141,7 +144,7 @@ export default {
   padding: 1.5rem;
   position: relative;
   transition: width var(--sidebar-transition-duration) ease,
-              padding var(--sidebar-transition-duration) ease;
+  padding var(--sidebar-transition-duration) ease;
 }
 
 .sidebar-header {
@@ -173,7 +176,7 @@ export default {
   opacity: 1;
   width: auto;
   transition: opacity var(--sidebar-transition-duration) ease,
-              width var(--sidebar-transition-duration) ease;
+  width var(--sidebar-transition-duration) ease;
 }
 
 /* Bouton Toggle */
@@ -196,7 +199,7 @@ export default {
   color: var(--color-text);
   z-index: 10;
   transition: transform var(--sidebar-transition-duration) ease,
-              right var(--sidebar-transition-duration) ease;
+  right var(--sidebar-transition-duration) ease;
 }
 .toggle-button:hover {
   background-color: #eee;
@@ -222,16 +225,16 @@ export default {
   font-weight: 500;
   border-radius: 8px;
   transition: background-color 0.2s ease, color 0.2s ease,
-              justify-content var(--sidebar-transition-duration) ease,
-              padding var(--sidebar-transition-duration) ease;
+  justify-content var(--sidebar-transition-duration) ease,
+  padding var(--sidebar-transition-duration) ease;
   white-space: nowrap;
   overflow: hidden;
 }
 
 .nav-icon {
-  display: inline-block;
   width: 24px;
-  text-align: center;
+  height: 24px;
+  object-fit: contain;
   margin-right: 12px;
   flex-shrink: 0;
   transition: margin-right var(--sidebar-transition-duration) ease;
@@ -243,7 +246,7 @@ export default {
   overflow: hidden;
   white-space: nowrap;
   transition: opacity var(--sidebar-transition-duration) ease,
-              width var(--sidebar-transition-duration) ease;
+  width var(--sidebar-transition-duration) ease;
 }
 
 .nav-links a:hover {
@@ -290,14 +293,15 @@ export default {
 
 /* Main Content (CORRIGÉ) */
 .main-content {
-  flex-grow: 1; /* Prend l'espace restant */
+  flex-grow: 1;
   background-color: #fcfcfc;
   box-sizing: border-box;
-  /* Padding intérieur standard */
   padding: 2rem 3rem;
-  /* Pas de margin-left, flexbox gère l'espace */
-  transition: padding-left var(--sidebar-transition-duration) ease; /* On anime le padding si besoin */
+  /* J'ai supprimé le margin-left et sa transition */
 }
+
+/* J'ai supprimé la règle .dashboard-layout.sidebar-collapsed .main-content */
+
 
 /* Header (dans main-content) */
 .header {
@@ -336,6 +340,12 @@ export default {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.user-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
 }
 
 .user-info a {
