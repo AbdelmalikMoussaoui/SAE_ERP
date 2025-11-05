@@ -22,22 +22,22 @@ public class Ec {
     @Column(nullable = false)
     private String title;
 
-    @Column(name = "cm_hours", precision = 5, scale = 2)
+    @Column(name = "cm_hours")
     private int cmHours;
 
-    @Column(name = "td_hours", precision = 5, scale = 2)
+    @Column(name = "td_hours")
     private int tdHours;
 
-    @Column(name = "tp_hours", precision = 5, scale = 2)
+    @Column(name = "tp_hours")
     private int tpHours;
 
-    @Column(name = "cm_hours_alt", precision = 5, scale = 2)
+    @Column(name = "cm_hours_alt")
     private int cmHoursAlt;
 
-    @Column(name = "td_hours_alt", precision = 5, scale = 2)
+    @Column(name = "td_hours_alt")
     private int tdHoursAlt;
 
-    @Column(name = "tp_hours_alt", precision = 5, scale = 2)
+    @Column(name = "tp_hours_alt")
     private int tpHoursAlt;
 
     public Ec() {
