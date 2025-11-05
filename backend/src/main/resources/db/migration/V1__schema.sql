@@ -38,12 +38,12 @@ CREATE TABLE ec (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   ue_id UUID REFERENCES ue(id),
   title TEXT NOT NULL,
-  cm_hours NUMERIC(5,2) DEFAULT 0,
-  td_hours NUMERIC(5,2) DEFAULT 0,
-  tp_hours NUMERIC(5,2) DEFAULT 0,
-  cm_hours_alt NUMERIC(5,2),
-  td_hours_alt NUMERIC(5,2),
-  tp_hours_alt NUMERIC(5,2)
+  cm_hours INT DEFAULT 0,
+  td_hours INT DEFAULT 0,
+  tp_hours INT DEFAULT 0,
+  cm_hours_alt INT,
+  td_hours_alt INT,
+  tp_hours_alt INT
 );
 
 CREATE TABLE sae (
