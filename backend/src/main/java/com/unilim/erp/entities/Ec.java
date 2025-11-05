@@ -23,27 +23,27 @@ public class Ec {
     private String title;
 
     @Column(name = "cm_hours", precision = 5, scale = 2)
-    private Double cmHours = 0.0;
+    private int cmHours;
 
     @Column(name = "td_hours", precision = 5, scale = 2)
-    private Double tdHours = 0.0;
+    private int tdHours;
 
     @Column(name = "tp_hours", precision = 5, scale = 2)
-    private Double tpHours = 0.0;
+    private int tpHours;
 
     @Column(name = "cm_hours_alt", precision = 5, scale = 2)
-    private Double cmHoursAlt;
+    private int cmHoursAlt;
 
     @Column(name = "td_hours_alt", precision = 5, scale = 2)
-    private Double tdHoursAlt;
+    private int tdHoursAlt;
 
     @Column(name = "tp_hours_alt", precision = 5, scale = 2)
-    private Double tpHoursAlt;
+    private int tpHoursAlt;
 
     public Ec() {
     }
 
-    public Ec(Ue ue, String title, Double cmHours, Double tdHours, Double tpHours) {
+    public Ec(Ue ue, String title, int cmHours, int tdHours, int tpHours) {
         this.ue = ue;
         this.title = title;
         this.cmHours = cmHours;
