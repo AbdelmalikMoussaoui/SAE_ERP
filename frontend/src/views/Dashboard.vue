@@ -19,8 +19,8 @@
           </a>
         </li>
         <li>
-          <a href="#">
-            <img src="@/assets/GestionDesRôles.png" alt="Gestion des rôles" class="nav-icon" />
+          <a href="#" @click.prevent="$router.push('/gestion-utilisateurs')">
+            <img src="@/assets/GestionRole.png" alt="Gestion des rôles" class="nav-icon" />
             <span class="nav-text">Gestion des rôle</span>
           </a>
         </li>
@@ -112,7 +112,6 @@ export default {
 </script>
 
 <style scoped>
-/* Variables CSS */
 .dashboard-layout {
   --font-primary: 'Poppins', sans-serif;
   --font-secondary: 'Montserrat', sans-serif;
@@ -134,7 +133,6 @@ export default {
   overflow-x: hidden;
 }
 
-/* Sidebar */
 .sidebar {
   width: var(--sidebar-width-open);
   flex-shrink: 0;
@@ -144,7 +142,7 @@ export default {
   padding: 1.5rem;
   position: relative;
   transition: width var(--sidebar-transition-duration) ease,
-  padding var(--sidebar-transition-duration) ease;
+              padding var(--sidebar-transition-duration) ease;
 }
 
 .sidebar-header {
@@ -176,10 +174,9 @@ export default {
   opacity: 1;
   width: auto;
   transition: opacity var(--sidebar-transition-duration) ease,
-  width var(--sidebar-transition-duration) ease;
+              width var(--sidebar-transition-duration) ease;
 }
 
-/* Bouton Toggle */
 .toggle-button {
   position: absolute;
   top: 50%;
@@ -199,7 +196,7 @@ export default {
   color: var(--color-text);
   z-index: 10;
   transition: transform var(--sidebar-transition-duration) ease,
-  right var(--sidebar-transition-duration) ease;
+              right var(--sidebar-transition-duration) ease;
 }
 .toggle-button:hover {
   background-color: #eee;
@@ -225,8 +222,8 @@ export default {
   font-weight: 500;
   border-radius: 8px;
   transition: background-color 0.2s ease, color 0.2s ease,
-  justify-content var(--sidebar-transition-duration) ease,
-  padding var(--sidebar-transition-duration) ease;
+              justify-content var(--sidebar-transition-duration) ease,
+              padding var(--sidebar-transition-duration) ease;
   white-space: nowrap;
   overflow: hidden;
 }
@@ -246,7 +243,7 @@ export default {
   overflow: hidden;
   white-space: nowrap;
   transition: opacity var(--sidebar-transition-duration) ease,
-  width var(--sidebar-transition-duration) ease;
+              width var(--sidebar-transition-duration) ease;
 }
 
 .nav-links a:hover {
@@ -259,7 +256,6 @@ export default {
   font-weight: 600;
 }
 
-/* Styles pour l'état replié */
 .dashboard-layout.sidebar-collapsed .sidebar {
   width: var(--sidebar-width-closed);
   padding-left: 1rem;
@@ -291,19 +287,13 @@ export default {
   padding-right: 0.5rem;
 }
 
-/* Main Content (CORRIGÉ) */
 .main-content {
   flex-grow: 1;
   background-color: #fcfcfc;
   box-sizing: border-box;
   padding: 2rem 3rem;
-  /* J'ai supprimé le margin-left et sa transition */
 }
 
-/* J'ai supprimé la règle .dashboard-layout.sidebar-collapsed .main-content */
-
-
-/* Header (dans main-content) */
 .header {
   display: flex;
   justify-content: space-between;
@@ -357,7 +347,6 @@ export default {
   text-decoration: underline;
 }
 
-/* Content Cards */
 .content-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));

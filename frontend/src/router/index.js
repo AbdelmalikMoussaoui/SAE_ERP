@@ -3,6 +3,7 @@ import ConnexionView from '../views/Connexion.vue'
 import DashboardView from '../views/Dashboard.vue' 
 import GestionUtilisateurs from '../views/GestionUtilisateurs.vue'
 
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -28,6 +29,7 @@ const router = createRouter({
       name: 'gestion-utilisateurs',
       component: GestionUtilisateurs
     }
+
   ]
 })
 
